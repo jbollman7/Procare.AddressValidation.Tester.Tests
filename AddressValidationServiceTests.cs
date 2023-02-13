@@ -13,16 +13,15 @@ namespace Procare.AddressValidation.Tester.Tests
         public void SetUp()
         {
             addressValidationBaseUrl = new Uri("https://addresses.dev-procarepay.com");
-            retryNumber = 3;
         }
 
-            [Test]
+        [Test]
         public async Task GetAddressesAsync_ReturnsSuccessfulResponse_WhenRequestIsValid()
         {
             // Arrange
 
             using HttpClientFactory factory = new HttpClientFactory();
-            using AddressValidationService addressService = new AddressValidationService(factory, false, addressValidationBaseUrl, retryNumber);
+            using AddressValidationService addressService = new AddressValidationService(factory, false, addressValidationBaseUrl);
             var request = new AddressValidationRequest { Line1 = "1125 17th St Ste 1800", City = "Denver", StateCode = "CO", ZipCodeLeading5 = "80202" };
 
             // Act
@@ -38,7 +37,7 @@ namespace Procare.AddressValidation.Tester.Tests
         {
             // Arrange
             using HttpClientFactory factory = new HttpClientFactory();
-            using AddressValidationService addressService = new AddressValidationService(factory, false, addressValidationBaseUrl, retryNumber);
+            using AddressValidationService addressService = new AddressValidationService(factory, false, addressValidationBaseUrl);
             var request = new AddressValidationRequest { Line1 = "invalid address", City = "invalid city", StateCode = "invalid state", ZipCodeLeading5 = "invalid zip" };
 
             // Act
